@@ -1,0 +1,8 @@
+{
+  "name": "prueba",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "886ebc7b"
+}
