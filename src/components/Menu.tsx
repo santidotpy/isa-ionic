@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, refreshCircleOutline } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -22,6 +22,12 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
+  {
+    title: 'API Call',
+    url: '/folder/api-call',
+    iosIcon: refreshCircleOutline,
+    mdIcon: refreshCircleOutline
+  },
   {
     title: 'Inbox',
     url: '/folder/Inbox',
