@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
-
 interface Client {
   id: number;
   firstName: string;
@@ -14,6 +13,7 @@ interface Client {
 
 const GetClients = () => {
   const [clients, setClients] = useState<Client[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const fetchClients = async () => {
     try {
@@ -24,8 +24,10 @@ const GetClients = () => {
         }
       });
       setClients(response.data);
+      setErrorMessage('');
     } catch (error) {
       console.error('Error fetching clients:', error);
+      setErrorMessage('Es posible que el servidor de no esté corriendo. Por favor, inicia el servidor y vuelve a intentarlo.');
     }
   };
 
@@ -41,30 +43,33 @@ const GetClients = () => {
           borderRadius: '5px',
           cursor: 'pointer',
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+          marginBottom: '20px',
         }}
         onClick={fetchClients}
       >
         Get Clients
       </button>
+      {errorMessage && <p style={{ color: 'red', fontWeight: 'bold'}}>{errorMessage}</p>}
       {clients.length > 0 && (
         <IonCard>
-        <IonCardHeader>
-        <div
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          <IonCardTitle>Clients</IonCardTitle>
-          <IonCardContent>
-          <ul>
-            {clients.map(client => (
-              <li key={client.id}>{client.firstName} {client.lastName}</li>
-            ))}
-          </ul>
-          </IonCardContent>
-        </div>
-        </IonCardHeader>
+          <IonCardHeader>
+            <div
+              style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <IonCardTitle>Clients</IonCardTitle>
+              <IonCardContent>
+                <ul>
+                  {clients.map(client => (
+                    <li key={client.id}>{client.firstName} {client.lastName}</li>
+                  ))}
+                </ul>
+              </IonCardContent>
+            </div>
+          </IonCardHeader>
         </IonCard>
       )}
     </div>
